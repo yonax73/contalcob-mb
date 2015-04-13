@@ -1,0 +1,88 @@
+﻿/***************************/
+/******OVERWRITE INPUTS*****/
+/***************************/
+.list-block input[type="time"],
+.list-block input[type="number"],
+.list-block input[type="search"],
+.list-block input[type="text"],
+.list-block input[type="password"],
+.list-block input[type="email"],
+.list-block input[type="tel"],
+.list-block input[type="url"],
+.list-block input[type="date"],
+.list-block input[type="datetime-local"],
+.list-block select,
+.list-block textarea {
+    font-size: 20px;
+    height: 60px;
+    border-bottom: 1px solid #757575;
+}
+
+    .list-block input[type="time"]:focus,
+    .list-block input[type="number"]:focus,
+    .list-block input[type="search"]:focus,
+    .list-block input[type="text"]:focus,
+    .list-block input[type="password"]:focus,
+    .list-block input[type="email"]:focus,
+    .list-block input[type="tel"]:focus,
+    .list-block input[type="url"]:focus,
+    .list-block input[type="date"]:focus,
+    .list-block input[type="datetime-local"]:focus,
+    .list-block select:focus,
+    .list-block textarea:focus {
+        font-size: 20px;
+        height: 60px;
+        border-bottom: 1px solid #007aff;
+    }
+/***************************/
+/******OVERWRITE BUTTON*****/
+/***************************/
+.button {
+    border-radius: 2px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+.button.button-big {
+    font-size: 20px;
+    height: 55px;
+    line-height: 54px;
+}
+/*************************/
+/***OVERWRITE LAYOUT *****/
+/*************************/
+.layout-dark .list-block ul::before,
+.list-block.layout-dark ul::before {
+    background-color: transparent;
+}
+
+.layout-dark .list-block ul::after,
+.list-block.layout-dark ul::after {
+    background-color: transparent;
+}
+
+.layout-dark .list-block ul,
+.list-block.layout-dark ul {
+    background-color: transparent;
+}
+
+    .layout-dark .item-inner::after,
+    .layout-dark .list-block ul ul li:last-child .item-inner::after {
+        background-color: transparent;
+    }
+/**************************************/
+/******* OVERWRITE NAVBAR *************/
+/**************************************/
+.navbar {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+    .layout-dark .navbar::after,
+    .layout-dark .subnavbar::after,
+    .navbar.layout-dark::after,
+    .subnavbar.layout-dark::after {
+        background-color: transparent;
+    }
+
+.navbar, .toolbar {
+    font-size: 18px;
+    height: 60px;
+}
