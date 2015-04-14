@@ -7,15 +7,15 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>Contalcob app</title>
-    <link href="css/framework7.min.css" rel="stylesheet" />
-    <link href="css/framework7.themes.min.css" rel="stylesheet" />
-    <link href="css/app.min.css" rel="stylesheet" />
-
+    <link href="public/css/framework7.min.css" rel="stylesheet" />
+    <link href="public/css/framework7.themes.min.css" rel="stylesheet" />
+    <link href="public/css/app.min.css" rel="stylesheet" />
+    <link href="public/css/material-design/css/material-design-icons.min.css" rel="stylesheet" />
 </head>
 <body class="layout-dark theme-blue">
     <div class="statusbar-overlay"></div>
     <div class="panel-overlay"></div>
-    <div class="views">
+    <div id="page" class="views">
         <div class="view view-main">
             <div class="navbar navbar-hidden">
                 <div class="navbar-inner ">
@@ -24,7 +24,7 @@
             </div>
             <div class="pages navbar-through">
                 <div class="page no-toolbar no-navbar no-swipeback">
-                    <div class="content-block">
+                    <div class="contacts-block content-block-m">
                         <div class="row">
                             <div class="col-100 tablet-50">
                                 <div class="login-screen-title">Contalcob</div>
@@ -32,13 +32,19 @@
                                     <div class="list-block">
                                         <ul>
                                             <li class="item-content">
+                                                <span class="input-icon">
+                                                    <i class="mdi mdi-account"></i>
+                                                </span>
                                                 <div class="item-inner">
                                                     <div class="item-input">
-                                                        <input type="text" name="username" placeholder="Usuario" />
+                                                        <input type="text" name="user-name" placeholder="Usuario" />
                                                     </div>
                                                 </div>
                                             </li>
                                             <li class="item-content">
+                                                <span class="input-icon">
+                                                    <i class="mdi mdi-key"></i>
+                                                </span>
                                                 <div class="item-inner">
                                                     <div class="item-input">
                                                         <input type="password" name="password" placeholder="Contraseña" />
@@ -49,12 +55,16 @@
                                     </div>
                                     <div class="list-block">
                                         <ul>
-                                            <li>
-                                                <a class="button button-big active" href="#">Ingresar</a>
+                                            <li class="item-content">
+                                                <div class="item-inner">
+                                                    <div class="item-input">
+                                                        <a class="button button-big active" href="#">Ingresar</a>
+                                                    </div>
+                                                </div>
                                             </li>
                                         </ul>
                                         <div class="list-block-label">
-                                            <a href="sec/login/sign-up.html" class="item-link list-button">Registrarse</a>
+                                            <a href="set/employee/employee.html" class="item-link list-button">Registrarse</a>
                                         </div>
                                     </div>
                                 </form>
@@ -68,7 +78,10 @@
     <script src="intelxdk.js"></script>
     <script src="cordova.js"></script>
     <script src="xhr.js"></script>
-    <script src="js/framework7.min.js"></script>
-    <script src="js/app.min.js"></script>
+    <script src="public/js/utils.min.js"></script>
+    <script src="public/js/framework7.min.js"></script>    
+    <script src="public/js/app.min.js"></script>
+
+
 </body>
 </html>

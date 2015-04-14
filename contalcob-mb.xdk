@@ -4,7 +4,7 @@
     "creationData": {
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "projectGuid": "a99d31a4-3ac6-446e-b987-07e22da61014",
-      "lastModifiedDate": 1428955180386,
+      "lastModifiedDate": 1429046305214,
       "creationDate": 1428955180320
     },
     "XDK-app-designer": "false",
@@ -33,6 +33,20 @@
         "paramvals": {},
         "dependsOn": [],
         "dependedBy": []
+      },
+      {
+        "id": "com.ionic.keyboard",
+        "version": "",
+        "selectedState": "Included",
+        "data": {},
+        "paramvals": {},
+        "dependsOn": [],
+        "dependedBy": [],
+        "custom": "true",
+        "name": "Ionic Keyboard Plugin",
+        "origin": "https://github.com/driftyco/ionic-plugins-keyboard.git",
+        "originType": "repo",
+        "sourceLocation": ""
       }
     ],
     "buildConfigurations": {
@@ -43,12 +57,18 @@
         "preferences_": {
           "android-minSdkVersion": "10",
           "android-targetSdkVersion": "19",
-          "android-installLocation": "auto"
+          "android-installLocation": "auto",
+          "Fullscreen": false
         },
         "isActive_": true,
         "appName_": "contalcob-mb",
         "appID_": "xdk.intel.blank.template",
-        "appAccess_": [],
+        "appAccess_": [
+          {
+            "launch-external": "yes",
+            "origin": "*"
+          }
+        ],
         "icons_": [],
         "splashes_": [],
         "addlPermissions_": "",
@@ -57,7 +77,7 @@
         "cordovaCLIVersion_": "4.1.2",
         "crosswalkVersion_": "10",
         "appVersion_": "0.0.1",
-        "appDescription_": "Universal init code for Intel XDK and Cordova device ready detection.",
+        "appDescription_": "Contalcob",
         "appAuthor_": "Intel XDK",
         "appVersionCode_": "1"
       },
@@ -70,7 +90,7 @@
           "android-targetSdkVersion": "19",
           "android-installLocation": "auto"
         },
-        "isActive_": true,
+        "isActive_": false,
         "appName_": "contalcob-mb",
         "appID_": "xdk.intel.blank.template.crosswalk",
         "appAccess_": [],
@@ -94,7 +114,7 @@
           "ios-target": "6",
           "ios-configuration": "adhoc"
         },
-        "isActive_": true,
+        "isActive_": false,
         "appName_": "contalcob-mb",
         "appID_": "xdk.intel.blank.template",
         "appAccess_": [],
@@ -117,7 +137,7 @@
           "windows-publisher-display-name": "",
           "windows-publisher-id": ""
         },
-        "isActive_": true,
+        "isActive_": false,
         "appName_": "contalcob-mb",
         "appID_": "xdk.intel.blank.template",
         "appAccess_": [],
