@@ -5,10 +5,10 @@
         var input = inputs[i];
         input.addEventListener('focus', function (e) {
             var inp = this;
-            setTimeout(function () {
-                $$('.page-content').scrollTop($$(inp).offset().top);
-                inp.focus();
-            }, 1000);
+            setTimeout(function () {                         
+               // $$('.page-content').scrollTop($$(inp).offset().top+10);
+               //inp.focus();               
+            }, 400);
 
         }, true);
     }

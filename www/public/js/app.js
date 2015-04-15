@@ -21,16 +21,18 @@ try {
         var deviceHeight = window.innerHeight;
         var keyboardHeight = e.keyboardHeight;
         var height = deviceHeight - keyboardHeight;
-        height = height < 0 ? (height * -1) : height;        
-        document.getElementById('page').style.height = height + 'px';        
+        height = height < 0 ? (height * -1) : height;
+        document.getElementById('page').style.height = height + 'px';
+        $$('.page-content').scrollTop(height);
+
     });
 
-    window.addEventListener('native.keyboardhide', function (e) {       
+    window.addEventListener('native.keyboardhide', function (e) {
         setTimeout(function () {
             var deviceHeight = window.innerHeight;
-            document.getElementById('page').style.height = deviceHeight + 'px';            
-        },100)
-        
+            document.getElementById('page').style.height = deviceHeight + 'px';
+        }, 100)
+
     });
 
 } catch (ex) {
