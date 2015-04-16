@@ -10,39 +10,32 @@ var mainView = myApp.addView('.view-main', {
     dynamicNavbar: true
 
 });
+//start app
+startApp();
 $$(document).on('pageInit', function (e) {
     var page = e.detail.page;
     if (page.name === 'employee') {
-        config();
+        //adjuste deive
+        configApp();
     }
 });
-try {
-    window.addEventListener('native.keyboardshow', function (e) {
-        var deviceHeight = window.innerHeight;
-        var keyboardHeight = e.keyboardHeight;
-        var height = deviceHeight - keyboardHeight;
-        height = height < 0 ? (height * -1) : height;
-        document.getElementById('page').style.height = height + 'px';
-        $$('.page-content').scrollTop(height);
-
-    });
-
-    window.addEventListener('native.keyboardhide', function (e) {
-        setTimeout(function () {
-            var deviceHeight = window.innerHeight;
-            document.getElementById('page').style.height = deviceHeight + 'px';
-        }, 100)
-
-    });
-
-} catch (ex) {
-    alert(ex.message);
+/*
+ * start app
+ */
+function startApp() {
+    //keyboard listeners
+    keyBoardListener();
+    //config app
+    configApp();
 }
-//init config
-config();
-//config
-function config() {
-    adjusteResizeWindow();
+/*
+ * config app
+ */
+function configApp() {
+    //adjuste device
+    adjustDeviceSize();
 }
+
+
 
 
