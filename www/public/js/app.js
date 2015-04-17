@@ -15,8 +15,7 @@ startApp();
 $$(document).on('pageInit', function (e) {
     var page = e.detail.page;
     if (page.name === 'employee') {
-        //adjuste deive
-        configApp();
+        var employee = new Employee();
     }
 });
 /*
@@ -25,16 +24,10 @@ $$(document).on('pageInit', function (e) {
 function startApp() {
     //keyboard listeners
     keyBoardListener();
-    //config app
-    configApp();
+    keyBoardScroller();
+
 }
-/*
- * config app
- */
-function configApp() {
-    //adjuste device
-    adjustDeviceSize();
-}
+
 
 
 

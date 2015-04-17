@@ -4,7 +4,7 @@
     "creationData": {
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "projectGuid": "a99d31a4-3ac6-446e-b987-07e22da61014",
-      "lastModifiedDate": 1429046305214,
+      "lastModifiedDate": 1429284585167,
       "creationDate": 1428955180320
     },
     "XDK-app-designer": "false",
@@ -62,7 +62,7 @@
         },
         "isActive_": true,
         "appName_": "contalcob-mb",
-        "appID_": "xdk.intel.blank.template",
+        "appID_": "yonax73.contalcob.app",
         "appAccess_": [
           {
             "launch-external": "yes",
