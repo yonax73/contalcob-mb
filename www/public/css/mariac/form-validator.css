@@ -4,3 +4,6 @@
 .validate-msg{
     color:#F44336;
 }
+.validate-msg.hidden{
+    display:none;
+}

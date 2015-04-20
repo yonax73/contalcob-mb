@@ -1,4 +1,4 @@
-/**
+﻿/**
 @ Autor :@yonax73 | yonax73@gmail.com
 @ Version: 0.1
 @ Date : 4/16/2015
@@ -6,9 +6,7 @@
 @ Update by: @yonax73  | yonax73@gmail.com
 @ Description: utils class
 **/
-var Utils = (function () {
-    function Utils() {
-    }
+class Utils {
     /**
     @ Autor :@yonax73 | yonax73@gmail.com
     @ Version: 0.1
@@ -17,9 +15,9 @@ var Utils = (function () {
     @ Update by: @yonax73  | yonax73@gmail.com
     @ Description: keyboardlistener
     **/
-    Utils.keyBoardListener = function () {
+    static keyBoardListener() {
         try {
-            window.addEventListener('native.keyboardshow', function (e) {
+            window.addEventListener('native.keyboardshow', function (e: any) {
                 var deviceHeight = window.innerHeight;
                 var keyboardHeight = e.keyboardHeight;
                 var deviceHeightAdjusted = deviceHeight - keyboardHeight;
@@ -32,11 +30,11 @@ var Utils = (function () {
                     document.getElementById('page').style.height = 100 + '%';
                 }, 100);
             });
-        }
-        catch (ex) {
+        } catch (ex) {
             alert(ex.message);
         }
-    };
+    }
+
     /**
     @ Autor :@yonax73 | yonax73@gmail.com
     @ Version: 0.1
@@ -45,7 +43,7 @@ var Utils = (function () {
     @ Update by: @yonax73  | yonax73@gmail.com
     @ Description: keyBoardScroller
     **/
-    Utils.keyBoardScroller = function () {
+    static keyBoardScroller() {
         var inputs = document.querySelectorAll('input');
         var n = inputs.length;
         for (var i = 0; i < n; i++) {
@@ -63,13 +61,11 @@ var Utils = (function () {
                                 document.getElementById('page-content').scrollTop = targetPosition - padding;
                             }
                         }
-                    }
-                    catch (ex) {
+                    } catch (ex) {
                         console.log(ex.message);
                     }
                 }, 600);
             }, true);
         }
-    };
-    return Utils;
-})();
+    }
+}
