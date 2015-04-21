@@ -4,7 +4,7 @@
     "creationData": {
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "projectGuid": "a99d31a4-3ac6-446e-b987-07e22da61014",
-      "lastModifiedDate": 1429284585167,
+      "lastModifiedDate": 1429651369369,
       "creationDate": 1428955180320
     },
     "XDK-app-designer": "false",
@@ -47,6 +47,37 @@
         "origin": "https://github.com/driftyco/ionic-plugins-keyboard.git",
         "originType": "repo",
         "sourceLocation": ""
+      },
+      {
+        "id": "org.apache.cordova.camera",
+        "version": "0.3.4",
+        "selectedState": "Included",
+        "data": {},
+        "paramvals": {},
+        "dependsOn": [],
+        "dependedBy": []
+      },
+      {
+        "id": "org.apache.cordova.file",
+        "version": "1.3.2",
+        "selectedState": "Included",
+        "data": {},
+        "paramvals": {},
+        "dependsOn": [],
+        "dependedBy": [
+          "org.apache.cordova.file-transfer"
+        ]
+      },
+      {
+        "id": "org.apache.cordova.file-transfer",
+        "version": "0.4.8",
+        "selectedState": "Included",
+        "data": {},
+        "paramvals": {},
+        "dependsOn": [
+          "org.apache.cordova.file"
+        ],
+        "dependedBy": []
       }
     ],
     "buildConfigurations": {

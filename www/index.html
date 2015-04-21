@@ -29,16 +29,17 @@
                         <div class="row" style="overflow: auto; height: 100vh;">
                             <div class="col-100 tablet-50">
                                 <div class="login-screen-title">Contalcob</div>
-                                <form>
+                                <form id="login-frm">
                                     <div class="list-block">
                                         <ul>
                                             <li class="item-content">
                                                 <span class="input-icon">
                                                     <i class="mdi mdi-account"></i>
                                                 </span>
-                                                <div class="item-inner">
+                                                <div class="item-inner validate-content">
                                                     <div class="item-input">
-                                                        <input type="text" name="user-name" placeholder="Usuario" />
+                                                        <input type="text" name="user-name" class="validate" placeholder="Usuario" data-required="true" />
+                                                        <small class="validate-msg hidden">El nombre de usuario es requerido!</small>
                                                     </div>
                                                 </div>
                                             </li>
@@ -47,8 +48,9 @@
                                                     <i class="mdi mdi-key"></i>
                                                 </span>
                                                 <div class="item-inner">
-                                                    <div class="item-input">
-                                                        <input type="password" name="password" placeholder="Contraseña" />
+                                                    <div class="item-input validate-content">
+                                                        <input type="password" name="password" placeholder="Contraseña" class="validate" data-required="true" />
+                                                        <small class="validate-msg hidden">La contraseña es requerida!</small>
                                                     </div>
                                                 </div>
                                             </li>
@@ -59,7 +61,7 @@
                                             <li class="item-content">
                                                 <div class="item-inner">
                                                     <div class="item-input">
-                                                        <a class="button button-big active" href="#">Ingresar</a>
+                                                        <button type="submit" class="button button-big active" href="#">Ingresar</button>
                                                     </div>
                                                 </div>
                                             </li>
@@ -80,11 +82,12 @@
     <script src="cordova.js"></script>
     <script src="xhr.js"></script>
     <script src="public/js/utils.min.js"></script>
-    <script src="public/js/framework7.min.js"></script>    
+    <script src="public/js/framework7.min.js"></script>
     <script src="public/js/mariac/form-validator.min.js"></script>
-    <script src="public/js/set/employee/Employee.min.js"></script>
-    <script src="public/js/bsp/client/ClientList.min.js"></script>  
-    <script src="public/js/app.min.js"></script>   
+    <script src="public/js/sec/login/login.min.js"></script>
+    <script src="public/js/set/employee/employee.min.js"></script>
+    <script src="public/js/bsp/client/ClientList.min.js"></script>
+    <script src="public/js/app.min.js"></script>
 
 </body>
 </html>

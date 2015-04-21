@@ -105,11 +105,11 @@ var FormValidator = (function () {
         }
     };
     FormValidator.prototype.showError = function (input, msg) {
-        if (input.classList.contains(this.errorInputCl)) {
+        if (!input.classList.contains(this.errorInputCl)) {
             input.classList.add(this.errorInputCl);
         }
         if (msg.classList.contains(this.hiddenCl)) {
-            input.classList.add(this.hiddenCl);
+            msg.classList.remove(this.hiddenCl);
         }
         this.result = false;
     };
@@ -117,8 +117,8 @@ var FormValidator = (function () {
         if (input.classList.contains(this.errorInputCl)) {
             input.classList.remove(this.errorInputCl);
         }
-        if (msg.classList.contains(this.hiddenCl)) {
-            input.classList.remove(this.hiddenCl);
+        if (!msg.classList.contains(this.hiddenCl)) {
+            msg.classList.add(this.hiddenCl);
         }
         this.result = true;
     };
@@ -144,7 +144,7 @@ var FormValidator = (function () {
         //Check equals to
         if (input.dataset.equalsto) {
             var input2 = document.getElementById(input.dataset.equalsto);
-            var msg2 = document.getElementById(input.dataset.inputMsg);
+            var msg2 = document.getElementById(input.dataset.inputmsg);
             if (FormValidator.isEqualsTo(input2.value, input.value)) {
                 this.clear(input, msg);
                 this.clear(input2, msg2);
@@ -254,6 +254,15 @@ var FormValidator = (function () {
         //Check credit card
         if (input.dataset.creditcard) {
             if (FormValidator.isCreditCard(input.value)) {
+                this.clear(input, msg);
+            }
+            else {
+                this.showError(input, msg);
+            }
+        }
+        //Check user
+        if (input.dataset.user) {
+            if (FormValidator.isUserName(input.value)) {
                 this.clear(input, msg);
             }
             else {
@@ -413,6 +422,13 @@ var FormValidator = (function () {
     */
     FormValidator.isValidOption = function (input, option) {
         return (!isNaN(option) && option > 0);
+    };
+    /*
+    * @param HtmlElement input
+    * @returns true if value is user name
+    */
+    FormValidator.isUserName = function (value) {
+        return value.match(/^[a-zA-Z0-9.\-_$@*!]{3,30}$/);
     };
     return FormValidator;
 })();

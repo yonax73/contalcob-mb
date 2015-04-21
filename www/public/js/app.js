@@ -1,6 +1,8 @@
 ﻿// Initialize app
 var myApp = new Framework7();
-
+//Init login view
+var login = new Login();
+login.init();
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
 
@@ -15,7 +17,8 @@ startApp();
 $$(document).on('pageInit', function (e) {
     var page = e.detail.page;
     if (page.name === 'employee') {
-        var employee = new Employee();
+        var employee = new Employee(myApp);
+        employee.init();
     }
 });
 /*
@@ -23,8 +26,8 @@ $$(document).on('pageInit', function (e) {
  */
 function startApp() {
     //keyboard listeners
-    keyBoardListener();
-    keyBoardScroller();
+    Utils.keyBoardListener();
+    Utils.keyBoardScroller();
 
 }
 

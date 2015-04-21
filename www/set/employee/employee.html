@@ -21,7 +21,7 @@
                             <h3 id="user-name-picture" class="text">Nombre usuario</h3>
                         </div>
                         <div class="action">
-                            <button type="button" class="btn btn-round blue">
+                            <button id="camera-action" type="button" class="btn btn-round blue">
                                 <i class="mdi mdi-camera"></i>
                             </button>
                         </div>
@@ -31,7 +31,7 @@
             <div class="content-block">
                 <div class="row">
                     <div class="col-100 tablet-50">
-                        <form id="user-register">
+                        <form id="user-register-frm">
                             <div class="list-block">
                                 <ul>
                                     <li class="item-content">
@@ -40,8 +40,8 @@
                                         </span>
                                         <div class="item-inner">
                                             <div class="item-input validate-content">
-                                                <input type="text" id="user-full-name" name="user-full-name" class="validate error-input" placeholder="Nombre Completo"  data-fullname="true"/>
-                                                <small class="validate-msg">EL nombre de usuario es requerido!</small>
+                                                <input type="text" id="user-full-name" name="user-full-name" class="validate" placeholder="Nombre Completo"  data-name="true"/>
+                                                <small class="validate-msg hidden">El nombre es requerido!</small>
                                             </div>
                                         </div>
                                     </li>
@@ -50,8 +50,9 @@
                                             <i class="mdi mdi-account"></i>
                                         </span>
                                         <div class="item-inner">
-                                            <div class="item-input">
-                                                <input type="text" name="user-name" id="user-name" placeholder="Nombre Usuario" />
+                                            <div class="item-input validate-content">
+                                                <input type="text" name="user-name" id="user-name" class="validate" placeholder="Nombre Usuario" data-user="true" />
+                                                <small class="validate-msg hidden">El nombre de usuario es requerido!</small>
                                             </div>
                                         </div>
                                     </li>
@@ -69,9 +70,21 @@
                                         <span class="input-icon">
                                             <i class="mdi mdi-phone"></i>
                                         </span>
-                                        <div class="item-inner">
+                                        <div class="item-inner validate-content">
                                             <div class="item-input">
-                                                <input type="text" name="user-mobile-number" placeholder="Número celular" />
+                                                <input type="text" name="user-mobile-number" class="validate" placeholder="Número celular" data-required="true" />
+                                                <small class="validate-msg hidden">El Número celular es requerido!</small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content">
+                                        <span class="input-icon">
+                                            <i class="mdi mdi-key"></i>
+                                        </span>
+                                        <div class="item-inner validate-content">
+                                            <div class="item-input">
+                                                <input type="password" id="user-password" name="user-password" class="validate" placeholder="Contraseña" data-required="true"/>
+                                                <small class="validate-msg hidden">La contraseña es requerida!</small>
                                             </div>
                                         </div>
                                     </li>
@@ -80,18 +93,9 @@
                                             <i class="mdi mdi-key"></i>
                                         </span>
                                         <div class="item-inner">
-                                            <div class="item-input">
-                                                <input type="password" id="user-password" name="user-password" placeholder="Contraseña" />
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="item-content">
-                                        <span class="input-icon">
-                                            <i class="mdi mdi-key"></i>
-                                        </span>
-                                        <div class="item-inner">
-                                            <div class="item-input">
-                                                <input type="password" id="user-password-confirm" placeholder="Confirmar Contraseña" />
+                                            <div class="item-input validate-content">
+                                                <input type="password" id="user-password-confirm" class="validate" placeholder="Confirmar Contraseña"  data-equalsto="user-password" data-inputmsg="user-password-confirm-msg" />
+                                                <small id="user-password-confirm-msg" class="validate-msg hidden">La contraseña no coincide!</small>
                                             </div>
                                         </div>
                                     </li>
@@ -102,7 +106,7 @@
                                     <li class="item-content">
                                         <div class="item-inner">
                                             <div class="item-input">
-                                                <a class="button button-big active" href="#">Guardar</a>
+                                                <button class="button button-big active">Guardar</button>
                                             </div>
                                         </div>
                                     </li>
