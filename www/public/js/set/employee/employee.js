@@ -18,11 +18,15 @@ var Employee = (function () {
         this.userRegisterFrm = document.getElementById('user-register-frm');
         this.formValidator = new FormValidator(this.userRegisterFrm);
         this.cameraActionBtn = document.getElementById('camera-action');
+        this.takePictureBtn = document.getElementById('take-picture-btn');
+        this.uploadPictureGalleryBtn = document.getElementById('upload-picture-gallery-btn');
+        this.userPictureImg = document.getElementById('user-picture-img');
         //functions
         Utils.keyBoardScroller();
         this.userNameOnKeyUp();
         this.userRegisterFormOnSubmit();
-        this.cameraActionOnClick();
+        this.takePictureOnclick();
+        this.uploadPictureGalleryOnclick();
     };
     /*
      * key up event user name
@@ -45,34 +49,71 @@ var Employee = (function () {
         });
     };
     /*
-     * camera action
+     * onclick take picture
      */
-    Employee.prototype.cameraActionOnClick = function () {
+    Employee.prototype.takePictureOnclick = function () {
         var _this = this;
-        this.cameraActionBtn.onclick = function () {
-            var buttons = [
-                {
-                    text: 'Button1',
-                    onClick: function () {
-                        _this.myApp.alert('Button1 clicked');
-                    }
-                },
-                {
-                    text: 'Button2',
-                    onClick: function () {
-                        _this.myApp.alert('Button2 clicked');
-                    }
-                },
-                {
-                    text: 'Cancel',
-                    color: 'red',
-                    onClick: function () {
-                        _this.myApp.alert('Cancel clicked');
-                    }
-                },
-            ];
-            _this.myApp.actions(buttons);
+        this.takePictureBtn.click = function () {
+            _this.takePicture();
         };
+    };
+    /*
+     * onclick upload picture gallery
+     */
+    Employee.prototype.uploadPictureGalleryOnclick = function () {
+        var _this = this;
+        this.uploadPictureGalleryBtn.click = function () {
+            _this.uploadPictureGallery();
+        };
+    };
+    /*
+     * take picture
+     */
+    Employee.prototype.takePicture = function () {
+        try {
+            navigator.camera.getPicture(this.onSuccessPicture, this.onErrorPicture, {
+                quality: 50,
+                destinationType: Camera.DestinationType.FILE_URI
+            });
+        }
+        catch (ex) {
+            alert(ex.message);
+            console.log(ex);
+        }
+    };
+    /*
+     * upload picture gallery
+     */
+    Employee.prototype.uploadPictureGallery = function () {
+        try {
+            navigator.camera.getPicture(this.onSuccessPicture, this.onErrorPicture, {
+                quality: 50,
+                destinationType: Camera.DestinationType.FILE_URI,
+                sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+            });
+        }
+        catch (ex) {
+            alert(ex.message);
+            console.log(ex);
+        }
+    };
+    /*
+     * on success picture
+     */
+    Employee.prototype.onSuccessPicture = function (dataURI) {
+        this.uploaadPictureServer(dataURI);
+    };
+    /*
+     * on error picture
+     */
+    Employee.prototype.onErrorPicture = function (message) {
+        alert('Failed because: ' + message);
+    };
+    /*
+     * upload picture server
+     */
+    Employee.prototype.uploaadPictureServer = function (dataURI) {
+        this.userPictureImg.src = dataURI;
     };
     return Employee;
 })();

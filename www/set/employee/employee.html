@@ -17,11 +17,11 @@
                     <div class="cover">
                         <img src="public/images/profile/cover.png" alt="cover" />
                         <div class="avatar">
-                            <img src="public/images/profile/avatar.png" alt="cover" />
+                            <img id="user-picture-img" src="public/images/profile/avatar.png" alt="cover" />
                             <h3 id="user-name-picture" class="text">Nombre usuario</h3>
                         </div>
                         <div class="action">
-                            <button id="camera-action" type="button" class="btn btn-round blue">
+                            <button id="camera-action" type="button" class="btn btn-round blue link open-popover" data-popover=".popover-camera-options">
                                 <i class="mdi mdi-camera"></i>
                             </button>
                         </div>
@@ -40,7 +40,7 @@
                                         </span>
                                         <div class="item-inner">
                                             <div class="item-input validate-content">
-                                                <input type="text" id="user-full-name" name="user-full-name" class="validate" placeholder="Nombre Completo"  data-name="true"/>
+                                                <input type="text" id="user-full-name" name="user-full-name" class="validate" placeholder="Nombre Completo" data-name="true" />
                                                 <small class="validate-msg hidden">El nombre es requerido!</small>
                                             </div>
                                         </div>
@@ -83,7 +83,7 @@
                                         </span>
                                         <div class="item-inner validate-content">
                                             <div class="item-input">
-                                                <input type="password" id="user-password" name="user-password" class="validate" placeholder="Contraseña" data-required="true"/>
+                                                <input type="password" id="user-password" name="user-password" class="validate" placeholder="Contraseña" data-required="true" />
                                                 <small class="validate-msg hidden">La contraseña es requerida!</small>
                                             </div>
                                         </div>
@@ -94,7 +94,7 @@
                                         </span>
                                         <div class="item-inner">
                                             <div class="item-input validate-content">
-                                                <input type="password" id="user-password-confirm" class="validate" placeholder="Confirmar Contraseña"  data-equalsto="user-password" data-inputmsg="user-password-confirm-msg" />
+                                                <input type="password" id="user-password-confirm" class="validate" placeholder="Confirmar Contraseña" data-equalsto="user-password" data-inputmsg="user-password-confirm-msg" />
                                                 <small id="user-password-confirm-msg" class="validate-msg hidden">La contraseña no coincide!</small>
                                             </div>
                                         </div>
@@ -117,5 +117,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>

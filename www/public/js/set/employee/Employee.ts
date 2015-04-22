@@ -15,6 +15,9 @@ class Employee {
     private formValidator;
     private myApp;
     private cameraActionBtn;
+    private takePictureBtn;
+    private uploadPictureGalleryBtn;
+    private userPictureImg;
 
     constructor(myApp) {
         this.myApp = myApp;
@@ -28,11 +31,15 @@ class Employee {
         this.userRegisterFrm = document.getElementById('user-register-frm');
         this.formValidator = new FormValidator(this.userRegisterFrm);
         this.cameraActionBtn = document.getElementById('camera-action');
+        this.takePictureBtn = document.getElementById('take-picture-btn');
+        this.uploadPictureGalleryBtn = document.getElementById('upload-picture-gallery-btn');
+        this.userPictureImg = document.getElementById('user-picture-img');
         //functions
         Utils.keyBoardScroller();
         this.userNameOnKeyUp();
         this.userRegisterFormOnSubmit();
-        this.cameraActionOnClick();
+        this.takePictureOnclick();
+        this.uploadPictureGalleryOnclick();
     }
     /*
      * key up event user name
@@ -54,33 +61,67 @@ class Employee {
         });
     }
     /*
-     * camera action
+     * onclick take picture
      */
-    private cameraActionOnClick() {
-        this.cameraActionBtn.onclick =()=>{
-            var buttons = [
-                {
-                    text: 'Button1',
-                    onClick:()=> {
-                        this.myApp.alert('Button1 clicked');
-                    }
-                },
-                {
-                    text: 'Button2',
-                    onClick: () => {
-                        this.myApp.alert('Button2 clicked');
-                    }
-                },
-                {
-                    text: 'Cancel',
-                    color: 'red',
-                    onClick: () => {
-                        this.myApp.alert('Cancel clicked');
-                    }
-                },
-            ];
-            this.myApp.actions(buttons);
-        };
+    private takePictureOnclick() {
+        this.takePictureBtn.click = () => {
+            this.takePicture();
+        }
+    }
+    /*
+     * onclick upload picture gallery
+     */
+    private uploadPictureGalleryOnclick() {
+        this.uploadPictureGalleryBtn.click = () => {
+            this.uploadPictureGallery();
+        }
+    }
+    /*
+     * take picture
+     */
+    private takePicture() {
+        try {
+            navigator.camera.getPicture(this.onSuccessPicture, this.onErrorPicture, {
+                quality: 50
+                , destinationType: Camera.DestinationType.FILE_URI
+            });
+        } catch (ex) {
+            alert(ex.message);
+            console.log(ex);
+        }
+    }
+    /*
+     * upload picture gallery
+     */
+    private uploadPictureGallery() {
+        try {
+            navigator.camera.getPicture(this.onSuccessPicture, this.onErrorPicture, {
+                quality: 50
+                , destinationType: Camera.DestinationType.FILE_URI
+                , sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+            });
+        } catch (ex) {
+            alert(ex.message);
+            console.log(ex);
+        }
+    }
+    /*
+     * on success picture
+     */
+    private onSuccessPicture(dataURI) {
+        this.uploaadPictureServer(dataURI);
+    }
+    /*
+     * on error picture
+     */
+    private onErrorPicture(message) {
+        alert('Failed because: ' + message);
+    }
+    /*
+     * upload picture server
+     */
+    private uploaadPictureServer(dataURI) {
+        this.userPictureImg.src = dataURI;
     }
 
 }
