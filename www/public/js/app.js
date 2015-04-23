@@ -1,8 +1,6 @@
 ﻿// Initialize app
 var myApp = new Framework7();
-//Init login view
-var login = new Login();
-login.init();
+
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
 
@@ -16,10 +14,17 @@ var mainView = myApp.addView('.view-main', {
 startApp();
 $$(document).on('pageInit', function (e) {
     var page = e.detail.page;
-    if (page.name === 'employee') {
-        var employee = new Employee(myApp);
-        employee.init();
+    switch (e.detail.page.name) {
+        case 'employee':                                                        //employee
+            var employee = new Employee(myApp);
+            employee.init();
+            break;
+        case 'picture-crop':                                                    //picture-crop
+            var pictureCrop = new PictureCrop();
+            pictureCrop.init();
+            break;
     }
+
 });
 /*
  * start app
@@ -28,7 +33,9 @@ function startApp() {
     //keyboard listeners
     Utils.keyBoardListener();
     Utils.keyBoardScroller();
-
+    //Init login view
+    var login = new Login();
+    login.init();
 }
 
 

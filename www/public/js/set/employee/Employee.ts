@@ -17,7 +17,8 @@ class Employee {
     private cameraActionBtn;
     private takePictureBtn;
     private uploadPictureGalleryBtn;
-    private userPictureImg;
+    static userPictureImg;
+    static userPreloaderImg;
 
     constructor(myApp) {
         this.myApp = myApp;
@@ -31,15 +32,16 @@ class Employee {
         this.userRegisterFrm = document.getElementById('user-register-frm');
         this.formValidator = new FormValidator(this.userRegisterFrm);
         this.cameraActionBtn = document.getElementById('camera-action');
-        this.takePictureBtn = document.getElementById('take-picture-btn');
-        this.uploadPictureGalleryBtn = document.getElementById('upload-picture-gallery-btn');
-        this.userPictureImg = document.getElementById('user-picture-img');
+      /*  this.takePictureBtn = document.getElementById('take-picture-btn');
+        this.uploadPictureGalleryBtn = document.getElementById('upload-picture-gallery-btn');*/
+        Employee.userPictureImg = document.getElementById('user-picture-img');
+        Employee.userPreloaderImg = document.getElementById('user-preloader-img');
         //functions
         Utils.keyBoardScroller();
         this.userNameOnKeyUp();
         this.userRegisterFormOnSubmit();
-        this.takePictureOnclick();
-        this.uploadPictureGalleryOnclick();
+       // this.takePictureOnclick();
+       // this.uploadPictureGalleryOnclick();
     }
     /*
      * key up event user name
@@ -64,7 +66,7 @@ class Employee {
      * onclick take picture
      */
     private takePictureOnclick() {
-        this.takePictureBtn.click = () => {
+        this.takePictureBtn.onclick = () => {      
             this.takePicture();
         }
     }
@@ -72,7 +74,7 @@ class Employee {
      * onclick upload picture gallery
      */
     private uploadPictureGalleryOnclick() {
-        this.uploadPictureGalleryBtn.click = () => {
+        this.uploadPictureGalleryBtn.onclick = () => {           
             this.uploadPictureGallery();
         }
     }
@@ -108,8 +110,11 @@ class Employee {
     /*
      * on success picture
      */
-    private onSuccessPicture(dataURI) {
-        this.uploaadPictureServer(dataURI);
+    private onSuccessPicture(dataURI) {       
+        /*Employee.userPictureImg.classList.add('hidden');
+        Employee.userPreloaderImg.classList.remove('hidden');
+        Utils.closePopoverF7('popover-camera-options');*/
+        Employee.uploadPictureServer(dataURI);
     }
     /*
      * on error picture
@@ -120,8 +125,10 @@ class Employee {
     /*
      * upload picture server
      */
-    private uploaadPictureServer(dataURI) {
-        this.userPictureImg.src = dataURI;
+    static uploadPictureServer(dataURI) {
+        Employee.userPictureImg.src = dataURI;
+        /*Employee.userPictureImg.classList.remove('hidden');
+        Employee.userPreloaderImg.classList.add('hidden');*/
     }
 
 }

@@ -12,22 +12,21 @@
 <div class="pages navbar-through">
     <div data-page="employee" class="page">
         <div id="page-content" class="page-content">
-            <div>
-                <form>
-                    <div class="cover">
-                        <img src="public/images/profile/cover.png" alt="cover" />
-                        <div class="avatar">
-                            <img id="user-picture-img" src="public/images/profile/avatar.png" alt="cover" />
-                            <h3 id="user-name-picture" class="text">Nombre usuario</h3>
-                        </div>
-                        <div class="action">
-                            <button id="camera-action" type="button" class="btn btn-round blue link open-popover" data-popover=".popover-camera-options">
-                                <i class="mdi mdi-camera"></i>
-                            </button>
-                        </div>
+            <form>
+                <div class="cover">
+                    <img src="public/images/profile/cover.png" alt="cover" />
+                    <div class="avatar">
+                        <img id="user-preloader-img" class="hidden" src="public/images/preloaders/oval.svg" />
+                        <img id="user-picture-img" src="public/images/profile/avatar.png" alt="cover" />
+                        <h3 id="user-name-picture" class="text">Nombre usuario</h3>
                     </div>
-                </form>
-            </div>
+                    <div class="action">
+                        <a id="camera-action" href="utils/picture-crop.html" class="btn btn-round blue link open-popover">
+                            <i class="mdi mdi-camera"></i>
+                        </a>
+                    </div>
+                </div>
+            </form>
             <div class="content-block">
                 <div class="row">
                     <div class="col-100 tablet-50">
@@ -106,7 +105,7 @@
                                     <li class="item-content">
                                         <div class="item-inner">
                                             <div class="item-input">
-                                                <button class="button button-big active">Guardar</button>
+                                                <button type="submit" class="button button-big active">Guardar</button>
                                             </div>
                                         </div>
                                     </li>
