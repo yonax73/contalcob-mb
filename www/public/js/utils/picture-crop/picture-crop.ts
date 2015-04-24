@@ -8,19 +8,33 @@
 **/
 class PictureCrop {
 
+    private takePictureBtn;
+    private importPictureBtn;
+    static pictureCropImg;
+    static saveChangesActionFn;
+    static myApp;
+
+    constructor(myApp,dataURI) {
+        this.takePictureBtn = document.getElementById('take-picture-pc-btn');
+        this.importPictureBtn = document.getElementById('import-picture-pc-btn');        
+        PictureCrop.pictureCropImg = document.getElementById('picture-crop-img');
+        PictureCrop.pictureCropImg.src = dataURI;
+        PictureCrop.myApp = myApp;
+    }
+
     public init() {
+        //init croppper
         var $image = $('.img-container > img');
         $image.cropper({
-            aspectRatio: 16 / 9,
             autoCropArea: 0.65,
             highlight: false,
             dragCrop: false,
-            movable: false,    
-            resizable:false,       
-            minContainerWidth: 180,
-            minContainerHeight: 180,
-            minCropBoxWidth: 180,
-            minCropBoxHeight: 180,
+            movable: false,
+            resizable: false,
+            minContainerWidth: 132,
+            minContainerHeight: 132,
+            minCropBoxWidth: 132,
+            minCropBoxHeight: 132,
             preview: ".img-preview"
         });
         // Methods
@@ -41,18 +55,16 @@ class PictureCrop {
                     }
                 }
                 result = $image.cropper(data.method, data.option);
-                if (data.method === 'getCroppedCanvas') {
-                /*    var parameters = {
-                        pictureId: {
-                            name: 'id-picture-business',
-                            value: document.getElementsByName('id-picture-business')[0].value
-                        },
-                        objectId: {
-                            name: 'id-business',
-                            value: document.getElementsByName('id-business')[0].value
+                if (data.method === 'getCroppedCanvas') {                    
+                    if (PictureCrop.saveChangesActionFn) {
+                        try {
+                            PictureCrop.saveChangesActionFn(result);
+                        } catch (ex) {
+                            PictureCrop.myApp.hidePreloader();
+                            alert(ex.message);
+                            console.log(ex);
                         }
-                    };
-                    uploadImage(result.toDataURL(), '/uploadpictureBusiness', 'picture-business-img', parameters);*/
+                    }
                 }
             }
         }).on('keydown', function (e) {
@@ -75,28 +87,68 @@ class PictureCrop {
                     break;
             }
         });
-        // Import image
-        var $inputImage = $('#inputImage'),
-            URL = window.URL || window.webkitURL,
-            blobURL;
-        if (URL) {
-            $inputImage.change(function () {
-                var files = this.files;
-                if (files && files.length) {
-                    var filePicture = files[0];
-                    if (/^image\/\w+$/.test(filePicture.type)) {
-                        blobURL = URL.createObjectURL(filePicture);
-                        $image.one('built.cropper', function () {
-                            URL.revokeObjectURL(blobURL); // Revoke when load complete
-                        }).cropper('reset', true).cropper('replace', blobURL);
-                        $inputImage.val('');
-                    } else {
-                        alert('Please choose an image file.');
-                    }
-                }
-            });
-        } else {
-            $inputImage.parent().remove();
+    }
+
+
+    public saveChangesAction(fn) {
+        PictureCrop.saveChangesActionFn = fn;
+    }
+
+    public takePictureAction(parameters) {
+        this.takePictureBtn.onclick = () => {
+            this.getPicture(parameters);
         }
     }
+
+    public importPictureAction(parameters) {
+        this.importPictureBtn.onclick = () => {
+            this.getPicture(parameters);
+        }
+    }
+
+    private getPicture(parameters) {
+        try {
+            PictureCrop.disabled(true);
+            PictureCrop.myApp.showPreloader();
+            navigator.camera.getPicture(this.onSuccess, this.onError, parameters);
+        } catch (ex) {
+            PictureCrop.myApp.hidePreloader();
+            PictureCrop.disabled(false);
+            alert(ex.message);
+            console.log(ex);
+        }
+    }
+
+    public onSuccess(dataURI) {
+        PictureCrop.refresh(dataURI);
+    }
+
+    public onError(message) {
+        alert('failed because: ' + message);
+    }
+
+    static refresh(dataURI) {
+        try {
+            var $image = $('.img-container > img');
+            $image.one('built.cropper', function () {
+                PictureCrop.disabled(false);
+                PictureCrop.myApp.hidePreloader();
+            }).cropper('reset', true).cropper('replace', dataURI);
+        } catch (ex) {
+            PictureCrop.myApp.hidePreloader();
+            PictureCrop.disabled(false);
+            alert(ex.message);
+            console.log(ex);
+        }
+    }
+
+    static disabled(value) {
+        document.getElementById('zoom-plus-pc-btn').disabled = value;
+        document.getElementById('zoom-minus-pc-btn').disabled = value;
+        document.getElementById('rotate-pc-btn').disabled = value;
+        document.getElementById('save-changes-pc-btn').disabled = value;
+        document.getElementById('import-picture-pc-btn').disabled = value;
+        document.getElementById('take-picture-pc-btn').disabled = value;
+    }
+
 }

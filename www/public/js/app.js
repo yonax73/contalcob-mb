@@ -13,15 +13,24 @@ var mainView = myApp.addView('.view-main', {
 //start app
 startApp();
 $$(document).on('pageInit', function (e) {
-    var page = e.detail.page;
+
     switch (e.detail.page.name) {
-        case 'employee':                                                        //employee
+        case 'employee':                                                        //employee           
             var employee = new Employee(myApp);
             employee.init();
             break;
         case 'picture-crop':                                                    //picture-crop
-            var pictureCrop = new PictureCrop();
+            var userPictureImg = document.getElementById('user-picture-img');
+            var pictureCrop = new PictureCrop(myApp, userPictureImg.src);
             pictureCrop.init();
+            pictureCrop.saveChangesAction(function (result) {
+                PictureCrop.myApp.showPreloader();
+                userPictureImg.src = result.toDataURL();
+                myApp.hidePreloader();
+                mainView.router.back();
+            });
+            pictureCrop.takePictureAction({ quality: 50, destinationType: Camera.DestinationType.FILE_URI });
+            pictureCrop.importPictureAction({ quality: 50, destinationType: Camera.DestinationType.FILE_URI, sourceType: Camera.PictureSourceType.PHOTOLIBRARY });
             break;
     }
 

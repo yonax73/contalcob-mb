@@ -18,16 +18,11 @@ var Employee = (function () {
         this.userRegisterFrm = document.getElementById('user-register-frm');
         this.formValidator = new FormValidator(this.userRegisterFrm);
         this.cameraActionBtn = document.getElementById('camera-action');
-        /*  this.takePictureBtn = document.getElementById('take-picture-btn');
-          this.uploadPictureGalleryBtn = document.getElementById('upload-picture-gallery-btn');*/
-        Employee.userPictureImg = document.getElementById('user-picture-img');
-        Employee.userPreloaderImg = document.getElementById('user-preloader-img');
-        //functions
+        this.userPictureImg = document.getElementById('user-picture-img');
+        //functions      
         Utils.keyBoardScroller();
         this.userNameOnKeyUp();
         this.userRegisterFormOnSubmit();
-        // this.takePictureOnclick();
-        // this.uploadPictureGalleryOnclick();
     };
     /*
      * key up event user name
@@ -48,78 +43,6 @@ var Employee = (function () {
                 alert('ok');
             }
         });
-    };
-    /*
-     * onclick take picture
-     */
-    Employee.prototype.takePictureOnclick = function () {
-        var _this = this;
-        this.takePictureBtn.onclick = function () {
-            _this.takePicture();
-        };
-    };
-    /*
-     * onclick upload picture gallery
-     */
-    Employee.prototype.uploadPictureGalleryOnclick = function () {
-        var _this = this;
-        this.uploadPictureGalleryBtn.onclick = function () {
-            _this.uploadPictureGallery();
-        };
-    };
-    /*
-     * take picture
-     */
-    Employee.prototype.takePicture = function () {
-        try {
-            navigator.camera.getPicture(this.onSuccessPicture, this.onErrorPicture, {
-                quality: 50,
-                destinationType: Camera.DestinationType.FILE_URI
-            });
-        }
-        catch (ex) {
-            alert(ex.message);
-            console.log(ex);
-        }
-    };
-    /*
-     * upload picture gallery
-     */
-    Employee.prototype.uploadPictureGallery = function () {
-        try {
-            navigator.camera.getPicture(this.onSuccessPicture, this.onErrorPicture, {
-                quality: 50,
-                destinationType: Camera.DestinationType.FILE_URI,
-                sourceType: Camera.PictureSourceType.PHOTOLIBRARY
-            });
-        }
-        catch (ex) {
-            alert(ex.message);
-            console.log(ex);
-        }
-    };
-    /*
-     * on success picture
-     */
-    Employee.prototype.onSuccessPicture = function (dataURI) {
-        /*Employee.userPictureImg.classList.add('hidden');
-        Employee.userPreloaderImg.classList.remove('hidden');
-        Utils.closePopoverF7('popover-camera-options');*/
-        Employee.uploadPictureServer(dataURI);
-    };
-    /*
-     * on error picture
-     */
-    Employee.prototype.onErrorPicture = function (message) {
-        alert('Failed because: ' + message);
-    };
-    /*
-     * upload picture server
-     */
-    Employee.uploadPictureServer = function (dataURI) {
-        Employee.userPictureImg.src = dataURI;
-        /*Employee.userPictureImg.classList.remove('hidden');
-        Employee.userPreloaderImg.classList.add('hidden');*/
     };
     return Employee;
 })();

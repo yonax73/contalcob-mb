@@ -7,21 +7,26 @@
 @ Description: picture crop
 **/
 var PictureCrop = (function () {
-    function PictureCrop() {
+    function PictureCrop(myApp, dataURI) {
+        this.takePictureBtn = document.getElementById('take-picture-pc-btn');
+        this.importPictureBtn = document.getElementById('import-picture-pc-btn');
+        PictureCrop.pictureCropImg = document.getElementById('picture-crop-img');
+        PictureCrop.pictureCropImg.src = dataURI;
+        PictureCrop.myApp = myApp;
     }
     PictureCrop.prototype.init = function () {
+        //init croppper
         var $image = $('.img-container > img');
         $image.cropper({
-            aspectRatio: 16 / 9,
             autoCropArea: 0.65,
             highlight: false,
             dragCrop: false,
             movable: false,
             resizable: false,
-            minContainerWidth: 180,
-            minContainerHeight: 180,
-            minCropBoxWidth: 180,
-            minCropBoxHeight: 180,
+            minContainerWidth: 132,
+            minContainerHeight: 132,
+            minCropBoxWidth: 132,
+            minCropBoxHeight: 132,
             preview: ".img-preview"
         });
         // Methods
@@ -42,6 +47,16 @@ var PictureCrop = (function () {
                 }
                 result = $image.cropper(data.method, data.option);
                 if (data.method === 'getCroppedCanvas') {
+                    if (PictureCrop.saveChangesActionFn) {
+                        try {
+                            PictureCrop.saveChangesActionFn(result);
+                        }
+                        catch (ex) {
+                            PictureCrop.myApp.hidePreloader();
+                            alert(ex.message);
+                            console.log(ex);
+                        }
+                    }
                 }
             }
         }).on('keydown', function (e) {
@@ -64,29 +79,63 @@ var PictureCrop = (function () {
                     break;
             }
         });
-        // Import image
-        var $inputImage = $('#inputImage'), URL = window.URL || window.webkitURL, blobURL;
-        if (URL) {
-            $inputImage.change(function () {
-                var files = this.files;
-                if (files && files.length) {
-                    var filePicture = files[0];
-                    if (/^image\/\w+$/.test(filePicture.type)) {
-                        blobURL = URL.createObjectURL(filePicture);
-                        $image.one('built.cropper', function () {
-                            URL.revokeObjectURL(blobURL); // Revoke when load complete
-                        }).cropper('reset', true).cropper('replace', blobURL);
-                        $inputImage.val('');
-                    }
-                    else {
-                        alert('Please choose an image file.');
-                    }
-                }
-            });
+    };
+    PictureCrop.prototype.saveChangesAction = function (fn) {
+        PictureCrop.saveChangesActionFn = fn;
+    };
+    PictureCrop.prototype.takePictureAction = function (parameters) {
+        var _this = this;
+        this.takePictureBtn.onclick = function () {
+            _this.getPicture(parameters);
+        };
+    };
+    PictureCrop.prototype.importPictureAction = function (parameters) {
+        var _this = this;
+        this.importPictureBtn.onclick = function () {
+            _this.getPicture(parameters);
+        };
+    };
+    PictureCrop.prototype.getPicture = function (parameters) {
+        try {
+            PictureCrop.disabled(true);
+            PictureCrop.myApp.showPreloader();
+            navigator.camera.getPicture(this.onSuccess, this.onError, parameters);
         }
-        else {
-            $inputImage.parent().remove();
+        catch (ex) {
+            PictureCrop.myApp.hidePreloader();
+            PictureCrop.disabled(false);
+            alert(ex.message);
+            console.log(ex);
         }
+    };
+    PictureCrop.prototype.onSuccess = function (dataURI) {
+        PictureCrop.refresh(dataURI);
+    };
+    PictureCrop.prototype.onError = function (message) {
+        alert('failed because: ' + message);
+    };
+    PictureCrop.refresh = function (dataURI) {
+        try {
+            var $image = $('.img-container > img');
+            $image.one('built.cropper', function () {
+                PictureCrop.disabled(false);
+                PictureCrop.myApp.hidePreloader();
+            }).cropper('reset', true).cropper('replace', dataURI);
+        }
+        catch (ex) {
+            PictureCrop.myApp.hidePreloader();
+            PictureCrop.disabled(false);
+            alert(ex.message);
+            console.log(ex);
+        }
+    };
+    PictureCrop.disabled = function (value) {
+        document.getElementById('zoom-plus-pc-btn').disabled = value;
+        document.getElementById('zoom-minus-pc-btn').disabled = value;
+        document.getElementById('rotate-pc-btn').disabled = value;
+        document.getElementById('save-changes-pc-btn').disabled = value;
+        document.getElementById('import-picture-pc-btn').disabled = value;
+        document.getElementById('take-picture-pc-btn').disabled = value;
     };
     return PictureCrop;
 })();

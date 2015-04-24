@@ -17,8 +17,8 @@ class Employee {
     private cameraActionBtn;
     private takePictureBtn;
     private uploadPictureGalleryBtn;
-    static userPictureImg;
-    static userPreloaderImg;
+    public userPictureImg;
+
 
     constructor(myApp) {
         this.myApp = myApp;
@@ -32,16 +32,11 @@ class Employee {
         this.userRegisterFrm = document.getElementById('user-register-frm');
         this.formValidator = new FormValidator(this.userRegisterFrm);
         this.cameraActionBtn = document.getElementById('camera-action');
-      /*  this.takePictureBtn = document.getElementById('take-picture-btn');
-        this.uploadPictureGalleryBtn = document.getElementById('upload-picture-gallery-btn');*/
-        Employee.userPictureImg = document.getElementById('user-picture-img');
-        Employee.userPreloaderImg = document.getElementById('user-preloader-img');
-        //functions
+        this.userPictureImg = document.getElementById('user-picture-img');
+        //functions      
         Utils.keyBoardScroller();
         this.userNameOnKeyUp();
         this.userRegisterFormOnSubmit();
-       // this.takePictureOnclick();
-       // this.uploadPictureGalleryOnclick();
     }
     /*
      * key up event user name
@@ -62,73 +57,6 @@ class Employee {
             }
         });
     }
-    /*
-     * onclick take picture
-     */
-    private takePictureOnclick() {
-        this.takePictureBtn.onclick = () => {      
-            this.takePicture();
-        }
-    }
-    /*
-     * onclick upload picture gallery
-     */
-    private uploadPictureGalleryOnclick() {
-        this.uploadPictureGalleryBtn.onclick = () => {           
-            this.uploadPictureGallery();
-        }
-    }
-    /*
-     * take picture
-     */
-    private takePicture() {
-        try {
-            navigator.camera.getPicture(this.onSuccessPicture, this.onErrorPicture, {
-                quality: 50
-                , destinationType: Camera.DestinationType.FILE_URI
-            });
-        } catch (ex) {
-            alert(ex.message);
-            console.log(ex);
-        }
-    }
-    /*
-     * upload picture gallery
-     */
-    private uploadPictureGallery() {
-        try {
-            navigator.camera.getPicture(this.onSuccessPicture, this.onErrorPicture, {
-                quality: 50
-                , destinationType: Camera.DestinationType.FILE_URI
-                , sourceType: Camera.PictureSourceType.PHOTOLIBRARY
-            });
-        } catch (ex) {
-            alert(ex.message);
-            console.log(ex);
-        }
-    }
-    /*
-     * on success picture
-     */
-    private onSuccessPicture(dataURI) {       
-        /*Employee.userPictureImg.classList.add('hidden');
-        Employee.userPreloaderImg.classList.remove('hidden');
-        Utils.closePopoverF7('popover-camera-options');*/
-        Employee.uploadPictureServer(dataURI);
-    }
-    /*
-     * on error picture
-     */
-    private onErrorPicture(message) {
-        alert('Failed because: ' + message);
-    }
-    /*
-     * upload picture server
-     */
-    static uploadPictureServer(dataURI) {
-        Employee.userPictureImg.src = dataURI;
-        /*Employee.userPictureImg.classList.remove('hidden');
-        Employee.userPreloaderImg.classList.add('hidden');*/
-    }
+
 
 }

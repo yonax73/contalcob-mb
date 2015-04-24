@@ -175,7 +175,6 @@ html, body {
     .avatar img {
         background-position: center center;
         background-size: cover;
-        border: 1px solid rgba(255, 255, 255,0.8);
         border-radius: 50%;
         display: inline-block;
         height: 132px;
@@ -260,14 +259,13 @@ html, body {
     display: none;
 }
 
-
 /******************************************************/
 /*************IMAGE CONTAINER - IMAGE PREVIEW *********/
 /******************************************************/
 .img-container {
     margin-bottom: 2px;
-    max-height: 270px;
-    min-height: 270px;
+    max-height: 265px;
+    min-height: 265px;
 }
 
 .img-container,
@@ -279,29 +277,42 @@ html, body {
 }
 
 .preview-content {
-    margin: auto;
+    margin: 10px auto;
+    padding-bottom: 10px;
     width: 132px;
 }
 
 .img-preview {
     border-radius: 50%;
-    margin-top: 15px;
     height: 132px;
-    width: 132px;
     min-height: 132px;
     min-width: 123px;
-    margin-bottom: 10px;
-}
-/*********************************/
-/*****BUTTONS GROUP***************/
-/*********************************/
-.buttons-group {
-    display: flex;
+    width: 132px;
 }
 
-    .buttons-group.buttons-group-flat > .button.button-big {
-        border: none;
-        box-shadow: none;
-        margin-left: 2px;
-        margin-right: 2px;
+
+/*********************************/
+/*****BUTTON SIMPLE***************/
+/*********************************/
+.button-simple {
+    border: none;
+    box-shadow: none;
+    margin-left: 0;
+    margin-right: 0;
+}
+/*********************************/
+/*** PRELOADER *******************/
+/*********************************/
+.preloader-mc {
+    position: relative;
+    width: 100%;
+}
+
+    .preloader-mc > img {
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: 0;
     }
